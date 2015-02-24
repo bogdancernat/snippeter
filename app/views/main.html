@@ -1,0 +1,30 @@
+<h3>All them snippets</h3>
+<div class="row snippets-listing-wrapper">
+  <div class="col-sm-12">
+
+    <div class="panel panel-default" ng-repeat="snippet in snippets | orderBy:snippet.updatedOn">
+      
+      <div class="panel-body">
+        <div class="snippet-description well">{{snippet.description}}</div>
+        <small class="pull-right"><i>by {{snippet.author}} - <span am-time-ago="snippet.updatedOn"></span></i></small>
+
+        <div class="code-preview">
+          <div ui-ace="{
+            useWrapMode : true,
+            showGutter: true,
+            theme:'twilight',
+            mode: 'javascript',
+            onLoad: 'configureAce'
+          }"
+          ng-model="snippet.snippet"
+          readonly></div>
+        </div>
+        <hr>
+        <button ng-click="editSnippet(snippet)" class="btn btn-success">Edit Snippet</button>
+        <button ng-click="removeSnippet(snippet)" class="btn btn-danger pull-right">Remove Snippet</button>
+      </div>
+
+    </div>
+
+  </div>
+</div>

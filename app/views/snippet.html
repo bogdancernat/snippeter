@@ -1,0 +1,55 @@
+
+
+<div class="row row-snippet-edit">
+  <div class="col-sm-12">
+    <h3>Snippet Edit <small>{{snippet.$id}}</small></h3>
+
+    <form name="editSnippetForm" ng-submit="saveSnippet">
+
+      <div class="panel panel-default">
+
+        <div class="panel-body">
+          <div class="form-group" ng-class="{ 'has-error' : editSnippetForm.author.$invalid && !editSnippetForm.author.$pristine }">
+            <label for="author">Author*</label>
+            <input  
+              ng-model="snippet.author"
+              ng-required="true"
+              type="text" 
+              name="author"
+              class="form-control" 
+              id="author" 
+              placeholder="Enter Author"
+              required>
+            <div ng-show="editSnippetForm.author.$invalid && !editSnippetForm.author.$pristine" class="label label-danger">Author is required.</div>
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea 
+              ng-model="snippet.description"
+              name="description" 
+              id="description" 
+              class="form-control" 
+              rows="5"></textarea>
+          </div>
+
+          <div class="code-preview">
+            <div ui-ace="{
+            useWrapMode : true,
+            showGutter: true,
+            theme:'twilight',
+            mode: 'javascript',
+            onLoad: 'configureAce'
+          }"
+          ng-model="snippet.snippet"></div>
+          <div ng-show="!snippet.snippet.length" class="label label-danger">Please enter your snippet in the code area.</div>
+        </div>
+        <hr>
+        <button type="submit" class="btn btn-success" ng-disabled="editSnippetForm.$invalid || !snippet.snippet.length">Save Changes</button>
+        <button ng-click="removeSnippet(snippet)" class="btn btn-danger pull-right">Remove Snippet</button>
+      </div>
+
+      </div>
+    </form>
+
+  </div>
+</div>
